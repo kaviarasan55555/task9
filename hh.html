@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .calculator {
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        #result {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+
+        .button {
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            text-align: center;
+            background-color: green;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .operator {
+            background-color: red;
+            color: white;
+        }
+
+        .clear {
+            background-color: green;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       
+   
+
+    <script>
+        
+        var calculatorContainer = document.createElement('div');
+        calculatorContainer.className = 'calculator';
+        
+        var resultInput = document.createElement('input');
+        resultInput.type = 'text';
+        resultInput.id = 'result';
+        resultInput.readOnly = true;
+        
+        var buttonsContainer = document.createElement('div');
+        buttonsContainer.className = 'buttons';
+        
+        var buttonRow1 = document.createElement('div');
+        buttonRow1.className = 'row'; 
+        buttonRow1.innerHTML = `
+          <button class="button" onclick="appendValue('7')">7</button>
+          <button class="button" onclick="appendValue('8')">8</button>
+          <button class="button" onclick="appendValue('9')">9</button>
+          <button class="button operator" onclick="appendValue('+')">+</button>
+        `;
+        
+        var buttonRow2 = document.createElement('div');
+        buttonRow2.className = 'row';
+        buttonRow2.innerHTML = `
+          <button class="button" onclick="appendValue('4')">4</button>
+          <button class="button" onclick="appendValue('5')">5</button>
+          <button class="button" onclick="appendValue('6')">6</button>
+          <button class="button operator" onclick="appendValue('-')">-</button>
+        `;
+        
+        var buttonRow3 = document.createElement('div');
+        buttonRow3.className = 'row'; 
+        buttonRow3.innerHTML = `
+          <button class="button" onclick="appendValue('1')">1</button>
+          <button class="button" onclick="appendValue('2')">2</button>
+          <button class="button" onclick="appendValue('3')">3</button>
+          <button class="button operator" onclick="appendValue('*')">*</button>
+        `;
+        
+        var buttonRow4 = document.createElement('div');
+        buttonRow4.className = 'row'; 
+        buttonRow4.innerHTML = `
+          <button class="button" onclick="appendValue('0')">0</button>
+          <button class="button" onclick="appendValue('.')">.</button>
+          <button class="button operator" onclick="calculate()">=</button>
+          <button class="button operator" onclick="appendValue('/')">/</button>
+        `;
+        
+        var buttonRow5 = document.createElement('div');
+        buttonRow5.className = 'row'; 
+        buttonRow5.innerHTML = `
+          <button class="button clear" onclick="clearResult()">Clear</button>
+        `;
+        
+        
+        buttonsContainer.appendChild(buttonRow1);
+        buttonsContainer.appendChild(buttonRow2);
+        buttonsContainer.appendChild(buttonRow3);
+        buttonsContainer.appendChild(buttonRow4);
+        buttonsContainer.appendChild(buttonRow5);
+        
+        calculatorContainer.appendChild(resultInput);
+        calculatorContainer.appendChild(buttonsContainer);
+        
+        
+        var container = document.querySelector('.container');
+        container.appendChild(calculatorContainer);
+        
+        
+        var expression = ''; 
+        function appendValue(value) {
+            expression += value; 
+            resultInput.value = expression; 
+        }
+        
+        function calculate() {
+            try {
+                var result = eval(expression); 
+                resultInput.value = result; 
+                expression = ''; 
+            } catch (error) {
+                resultInput.value = 'Error'; 
+            }
+        }
+        
+        function clearResult() {
+            expression = ''; 
+            resultInput.value = ''; 
+        }
+    </script>
+     </div>
+</body>
+</html>
